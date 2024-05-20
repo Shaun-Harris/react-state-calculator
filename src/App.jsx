@@ -10,10 +10,13 @@ const [operations, setOperations] = useState("+")
 const [result, setResult] = useState("0")
 
 /* function handling the left panel by checking if the value in the left panel is 0, replacing 0 if a number is clicked and appends the selected number/s to the value and clears value back to 0*/
+
 function handleFirst(num) {
-  if (leftPanel === "0") {
+  if (leftPanel === "0" && num !== ".") {
     setLeftPanel(num)
-    } else {
+  } else if (leftPanel.includes(".") && num === ".") {
+    // Do nothing if '.' exists  
+  } else {
     setLeftPanel(leftPanel + num)
   }
 }
@@ -24,8 +27,10 @@ function clearLeft() {
 
 /* same methods as in left but for the right panel */
 function handleSecond(num) {
-    if(rightPanel === "0") {
+    if (rightPanel === "0" && num !== ".") {
       setRightPanel(num)
+    } else if (rightPanel.includes(".") && num === ".") {
+    // Do nothing if '.' exists  
     } else {
       setRightPanel(rightPanel + num) 
     }
@@ -73,6 +78,7 @@ return (
           <button onClick={() => handleFirst('8')}>8</button>
           <button onClick={() => handleFirst('9')}>9</button>
           <button onClick={() => handleFirst('0')}>0</button>
+          <button onClick={() => handleFirst('.')}>.</button>
           <button onClick={clearLeft}>Clear</button>
         </div>
       </div>
@@ -100,6 +106,7 @@ return (
           <button onClick={() => handleSecond('8')}>8</button>
           <button onClick={() => handleSecond('9')}>9</button>
           <button onClick={() => handleSecond('0')}>0</button>
+          <button onClick={() => handleSecond('.')}>.</button>
           <button onClick={clearRight}>Clear</button>
         </div>
       </div>
